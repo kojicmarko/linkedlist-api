@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres
+    ports:
+      - 3254:5432
+    environment:
+      - POSTGRES_USER=marko
+      - POSTGRES_PASSWORD=kojic
+      - POSTGRES_DB=linkedlist
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data

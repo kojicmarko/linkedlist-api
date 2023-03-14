@@ -1,0 +1,57 @@
+generator client {
+  provider   = "prisma-client-js"
+  // HAS TO BE HERE SO I DON'T SEGFAULT
+  // https://github.com/prisma/prisma/issues/13478
+  engineType = "binary"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String    @id @default(uuid())
+  createdAt    DateTime  @default(now())
+  email        String    @unique
+  username     String    @unique
+  passwordHash String
+  posts        Post[]
+  comments     Comment[]
+  Vote         Vote[]
+}
+
+model Post {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  title     String    @db.VarChar(255)
+  content   String
+  comments  Comment[]
+  author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId  String
+}
+
+model Comment {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  content   String
+  author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId  String
+  post      Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String
+  parent    Comment?  @relation("ParentChild", fields: [parentId], references: [id], onDelete: Cascade)
+  children  Comment[] @relation("ParentChild")
+  parentId  String?
+  Vote      Vote[]
+}
+
+model Vote {
+  author    User    @relation(fields: [authorId], references: [id])
+  comment   Comment @relation(fields: [commentId], references: [id])
+  authorId  String
+  commentId String
+
+  @@id([authorId, commentId])
+}
