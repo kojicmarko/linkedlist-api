@@ -1,5 +1,7 @@
 name: main
-on: push
+on:
+  push:
+    paths: ["server/**"]
 jobs:
   lint:
     runs-on: ubuntu-latest
