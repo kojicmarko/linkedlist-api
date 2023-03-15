@@ -5,7 +5,7 @@ import connectRedis from "connect-redis";
 import { unknownEndpoint } from "./middleware/index";
 import { COOKIE_NAME, REDIS_URL, SECRET } from "./utils/config";
 // TODO: deal with that:
-// require("express-async-errors");
+require("express-async-errors");
 
 const app = express();
 
@@ -28,10 +28,12 @@ app.use(
 );
 
 import pingRouter from "./routes/ping";
+import usersRouter from "./routes/users";
 
 app.use(express.json());
 
 app.use("/ping", pingRouter);
+app.use("/api/users", usersRouter);
 
 app.use(unknownEndpoint);
 
