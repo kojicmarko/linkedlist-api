@@ -11,3 +11,8 @@ services:
       - POSTGRES_DB=linkedlist
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis
+    ports:
+      - 7963:6379
