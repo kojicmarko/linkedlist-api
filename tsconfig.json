@@ -11,5 +11,11 @@
     "sourceMap": true,
     "outDir": "dist"
   },
-  "include": ["src/**/*", "prisma/**/*"]
+  "include": [
+    "src/**/*",
+    "prisma/**/*",
+    "tests/**/*",
+    "jest.config.js",
+    "mocks.ts"
+  ]
 }
