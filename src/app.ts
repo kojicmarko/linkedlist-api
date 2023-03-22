@@ -29,11 +29,13 @@ app.use(
 
 import pingRouter from "./routes/ping";
 import usersRouter from "./routes/users";
+import authRouter from "./routes/auth";
 
 app.use(express.json());
 
 app.use("/ping", pingRouter);
 app.use("/api/users", usersRouter);
+app.use("/api/auth/", authRouter);
 
 app.use(unknownEndpoint);
 

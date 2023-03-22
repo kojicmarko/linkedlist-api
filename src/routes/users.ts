@@ -1,5 +1,8 @@
 import express from "express";
-import { getAllUsersInteractor, getUserInteractor } from "../interactors/index";
+import {
+  getAllUsersInteractor,
+  getUserInteractor,
+} from "../interactors/users/index";
 
 const router = express.Router();
 

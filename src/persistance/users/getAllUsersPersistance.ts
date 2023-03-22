@@ -1,4 +1,4 @@
-import { prisma } from "../../prisma/index";
+import { prisma } from "../../../prisma/index";
 export const getAllUsersPersistance = async () => {
   return await prisma.user.findMany({
     include: {

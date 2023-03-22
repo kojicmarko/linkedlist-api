@@ -1,5 +1,5 @@
-import { getUserPersistance } from "../persistance/getUserPersistance";
-import { UserDTO } from "../utils/types";
+import { getUserPersistance } from "../../persistance/users";
+import { UserDTO } from "../../utils/types";
 
 export const getUserInteractor = async (
   id: string

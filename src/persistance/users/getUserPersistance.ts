@@ -1,4 +1,4 @@
-import { prisma } from "../../prisma/index";
+import { prisma } from "../../../prisma/index";
 
 export const getUserPersistance = async (id: string) => {
   return await prisma.user.findUnique({
