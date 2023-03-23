@@ -1,2 +1,4 @@
 export * from "./getAllUsersInteractor";
-export * from "./getUserInteractor";
+export * from "./getUserByIdInteractor";
+export * from "./getUserByEmailInteractor";
+export * from "./getUserByUsernameInteractor";

@@ -1,2 +1,4 @@
 export * from "./getAllUsersPersistance";
-export * from "./getUserPersistance";
+export * from "./getUserByIdPersistance";
+export * from "./getUserByEmailPersistance";
+export * from "./getUserByUsernamePersistance";

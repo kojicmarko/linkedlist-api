@@ -4,7 +4,7 @@ import Redis from "ioredis";
 import connectRedis from "connect-redis";
 import { unknownEndpoint } from "./middleware/index";
 import { COOKIE_NAME, REDIS_URL, SECRET } from "./utils/config";
-// TODO: deal with that:
+// TODO: Deal with that
 require("express-async-errors");
 
 const app = express();

@@ -1,8 +1,8 @@
 import express from "express";
 import {
   getAllUsersInteractor,
-  getUserInteractor,
-} from "../interactors/users/index";
+  getUserByIdInteractor,
+} from "../interactors/users";
 
 const router = express.Router();
 
@@ -12,7 +12,7 @@ router.get("/", async (_req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-  const user = await getUserInteractor(req.params.id);
+  const user = await getUserByIdInteractor(req.params.id);
   if (!user) {
     return res.status(404).end();
   }
