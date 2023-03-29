@@ -11,47 +11,58 @@ datasource db {
 }
 
 model User {
-  id           String    @id @default(uuid())
-  createdAt    DateTime  @default(now())
-  email        String    @unique
-  username     String    @unique
+  id           String        @id @default(uuid())
+  createdAt    DateTime      @default(now())
+  email        String        @unique
+  username     String        @unique
   passwordHash String
   posts        Post[]
   comments     Comment[]
-  Vote         Vote[]
+  postLikes    PostLike[]
+  commentLikes CommentLike[]
 }
 
 model Post {
-  id        String    @id @default(uuid())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  title     String    @db.VarChar(255)
+  id        String     @id @default(uuid())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  title     String     @db.VarChar(255)
   content   String
   comments  Comment[]
-  author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  author    User       @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId  String
+  postLikes PostLike[]
 }
 
 model Comment {
-  id        String    @id @default(uuid())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  content   String
-  author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  authorId  String
-  post      Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId    String
-  parent    Comment?  @relation("ParentChild", fields: [parentId], references: [id], onDelete: Cascade)
-  children  Comment[] @relation("ParentChild")
-  parentId  String?
-  Vote      Vote[]
+  id           String        @id @default(uuid())
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  content      String
+  author       User          @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId     String
+  post         Post          @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId       String
+  parent       Comment?      @relation("ParentChild", fields: [parentId], references: [id], onDelete: Cascade)
+  children     Comment[]     @relation("ParentChild")
+  parentId     String?
+  commentLikes CommentLike[]
 }
 
-model Vote {
+model CommentLike {
   author    User    @relation(fields: [authorId], references: [id])
   comment   Comment @relation(fields: [commentId], references: [id])
   authorId  String
   commentId String
 
   @@id([authorId, commentId])
+}
+
+model PostLike {
+  author   User   @relation(fields: [authorId], references: [id])
+  post     Post   @relation(fields: [postId], references: [id])
+  authorId String
+  postId   String
+
+  @@id([authorId, postId])
 }

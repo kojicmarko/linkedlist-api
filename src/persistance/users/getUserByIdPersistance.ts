@@ -8,6 +8,8 @@ export const getUserByIdPersistance = async (id: string) => {
     include: {
       posts: true,
       comments: true,
+      postLikes: true,
+      commentLikes: true,
     },
   });
 };

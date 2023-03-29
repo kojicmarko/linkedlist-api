@@ -1,4 +1,4 @@
-import { Comment, Post } from "@prisma/client";
+import { Comment, PostLike, CommentLike, Post } from "@prisma/client";
 
 // https://stackoverflow.com/questions/65108033/property-user-does-not-exist-on-type-session-partialsessiondata
 declare module "express-session" {
@@ -9,10 +9,14 @@ declare module "express-session" {
 
 export type UserDTO = {
   username: string;
-  posts: Post[];
+  posts: UserPost[];
   comments: Comment[];
+  postLikes: PostLike[];
+  commentLikes: CommentLike[];
   createdAt: Date;
 };
+
+export type UserPost = Omit<Post, "id" | "content" | "authorId">;
 
 export interface UserEntry {
   email: string;
@@ -29,4 +33,19 @@ export interface UserEntryPersistance {
 export interface UserLogin {
   email: string;
   password: string;
+}
+
+export type PostDTO = {
+  title: string;
+  content: string;
+  comments: Comment[];
+  author: string;
+  postLikes: PostLike[];
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export interface PostEntry {
+  title: string;
+  content: string;
 }

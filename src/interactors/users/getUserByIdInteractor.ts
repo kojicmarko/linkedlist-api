@@ -14,6 +14,8 @@ export const getUserByIdInteractor = async (
     username: user.username,
     posts: user.posts,
     comments: user.comments,
+    postLikes: user.postLikes,
+    commentLikes: user.commentLikes,
     createdAt: user.createdAt,
   };
 

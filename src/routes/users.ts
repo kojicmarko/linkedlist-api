@@ -14,7 +14,7 @@ router.get("/", async (_req, res) => {
 router.get("/:id", async (req, res) => {
   const user = await getUserByIdInteractor(req.params.id);
   if (!user) {
-    return res.status(404).end();
+    return res.status(404).send({ ERROR: "Unknown Endpoint" }).end();
   }
   return res.status(200).json(user);
 });
