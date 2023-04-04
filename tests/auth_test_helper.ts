@@ -1,18 +1,23 @@
 import { UserEntry, UserLogin } from "../src/utils/types";
 
-export const user = {
+export const existingUser = {
   email: "existing@testmail.com",
   username: "existing",
-  password: "exsiting",
+  password: "existing",
 };
 
-export const loginUser: UserLogin = {
+export const validUser: UserLogin = {
   email: "existing@testmail.com",
   password: "existing",
 };
 
+export const invalidUser: UserLogin = {
+  email: "existing@testmail.com",
+  password: "invalid",
+};
+
 export const newUser: UserEntry = {
-  email: "test@testmail.com",
-  username: "test",
-  password: "test",
+  email: "testing@testmail.com",
+  username: "testing",
+  password: "testing",
 };

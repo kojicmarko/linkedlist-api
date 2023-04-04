@@ -49,3 +49,7 @@ export interface PostEntry {
   title: string;
   content: string;
 }
+
+export type Err = {
+  ERROR: string;
+};
