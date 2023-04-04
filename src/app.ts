@@ -10,6 +10,9 @@ require("express-async-errors");
 const app = express();
 
 const RedisStore = connectRedis(session);
+
+// Exported so Jest doesn't compalin
+// TODO: Deal with that
 export const redisClient = new Redis(REDIS_URL);
 
 app.use(

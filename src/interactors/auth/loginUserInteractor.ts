@@ -9,7 +9,7 @@ export const loginUserInteractor = async (
 ) => {
   const user = await getUserByEmailInteractor(email);
   if (!user) {
-    return null;
+    return undefined;
   }
 
   const passwordCorrect = await passwordValidatorPersistance(
@@ -17,7 +17,7 @@ export const loginUserInteractor = async (
     password
   );
   if (!(user && passwordCorrect)) {
-    return null;
+    return undefined;
   }
 
   session.userId = user.id;

@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "NODE_ENV=development tsnd --respawn --pretty --transpile-only --exit-child src/server.ts",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "test": "NODE_ENV=test jest --verbose --detectOpenHandles"
   },
   "keywords": [],
   "author": "",

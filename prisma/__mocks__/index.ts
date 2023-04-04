@@ -30,7 +30,8 @@ export const prisma = new PrismaClient({
   datasources: { db: { url } },
 });
 
-beforeEach(() => {
+// beforeEach
+beforeAll(() => {
   execSync(`${prismaBinary} db push --skip-generate`, {
     env: {
       ...process.env,
@@ -38,7 +39,8 @@ beforeEach(() => {
     },
   });
 });
-afterEach(async () => {
+// afterEach
+afterAll(async () => {
   await prisma.$executeRawUnsafe(
     `DROP SCHEMA IF EXISTS "${schemaId}" CASCADE;`
   );
