@@ -30,6 +30,7 @@ router.post("/", async (req, res) => {
     req.session.userId,
     req.body as PostEntry
   );
+
   return res.status(201).json(post);
 });
 

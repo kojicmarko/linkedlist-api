@@ -1,18 +1,13 @@
 import supertest from "supertest";
-import { prisma } from "../prisma/index";
+import { prisma } from "../prisma/";
 import app from "../src/app";
-import {
-  existingUser,
-  newUser,
-  validUser,
-  invalidUser,
-} from "./auth_test_helper";
+import { existingUser, newUser, validUser, invalidUser } from "./test_helper";
 import { redisClient } from "../src/app";
 import { registerUserInteractor } from "../src/interactors/auth";
 
 const api = supertest(app);
 
-describe("User Registration & Authentication", () => {
+describe("User Authentication", () => {
   beforeEach(async () => {
     const { email, username, password } = existingUser;
     await registerUserInteractor({
@@ -87,7 +82,7 @@ describe("User Registration & Authentication", () => {
       await api.post("/api/auth/login").send(validUser).expect(200);
     });
 
-    it("Rejects User with invalid credentials", async () => {
+    it("Fails with invalid credentials", async () => {
       const res = await api
         .post("/api/auth/login")
         .send(invalidUser)
