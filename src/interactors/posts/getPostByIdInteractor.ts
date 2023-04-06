@@ -1,9 +1,6 @@
 import { getPostByIdPersistance } from "../../persistance/posts";
-import { PostDTO } from "../../utils/types";
 
-export const getPostByIdInteractor = async (
-  id: string
-): Promise<PostDTO | undefined> => {
+export const getPostByIdInteractor = async (id: string) => {
   const post = await getPostByIdPersistance(id);
 
   if (!post) {

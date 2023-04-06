@@ -4,7 +4,7 @@ import {
   createPostInteractor,
   getPostByIdInteractor,
 } from "../interactors/posts";
-import { PostEntry } from "../utils/types";
+import { Err, PostEntry } from "../utils/types";
 
 const router = express.Router();
 
@@ -30,6 +30,10 @@ router.post("/", async (req, res) => {
     req.session.userId,
     req.body as PostEntry
   );
+
+  if ((post as Err).ERROR !== undefined) {
+    return res.status(400).json(post);
+  }
 
   return res.status(201).json(post);
 });

@@ -4,8 +4,9 @@ import { PostEntry } from "../../utils/types";
 
 export const createPostInteractor = async (userId: string, post: PostEntry) => {
   const user = await getUserByIdPersistance(userId);
-  if (!user) {
-    return undefined;
+
+  if (!user || !post.title || !post.content) {
+    return { ERROR: "Invalid Post" };
   }
 
   return await createPostPersistance(userId, post);

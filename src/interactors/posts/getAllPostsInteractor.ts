@@ -6,6 +6,7 @@ export const getAllPostsInteractor = async (): Promise<PostDTO[]> => {
 
   return posts.map(
     ({
+      id,
       title,
       content,
       comments,
@@ -14,6 +15,7 @@ export const getAllPostsInteractor = async (): Promise<PostDTO[]> => {
       createdAt,
       updatedAt,
     }) => ({
+      id,
       title,
       content,
       comments,

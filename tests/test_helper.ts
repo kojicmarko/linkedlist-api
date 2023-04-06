@@ -22,7 +22,23 @@ export const newUser: UserEntry = {
   password: "testing",
 };
 
-export const mockPostEntry: PostEntry = {
+export const validPost: PostEntry = {
   title: "Test Post",
   content: "This is a test post.",
+};
+
+export const invalidPost = {
+  random: "title",
+  invalid: "content",
+};
+
+// Should be temporary
+export type TestHeader = {
+  "x-powered-by": string;
+  "content-type": string;
+  "content-length": string;
+  etag: string;
+  "set-cookie": string[];
+  date: string;
+  connection: string;
 };

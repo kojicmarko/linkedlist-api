@@ -36,6 +36,7 @@ export interface UserLogin {
 }
 
 export type PostDTO = {
+  id: string;
   title: string;
   content: string;
   comments: Comment[];
