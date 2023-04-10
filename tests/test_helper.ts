@@ -1,4 +1,9 @@
-import { PostEntry, UserEntry, UserLogin } from "../src/utils/types";
+import {
+  CommentEntry,
+  PostEntry,
+  UserEntry,
+  UserLogin,
+} from "../src/utils/types";
 
 export const existingUser: UserEntry = {
   email: "existing@testmail.com",
@@ -30,6 +35,10 @@ export const validPost: PostEntry = {
 export const invalidPost = {
   random: "title",
   invalid: "content",
+};
+
+export const validComment: CommentEntry = {
+  content: "This is a test comment.",
 };
 
 // Should be temporary

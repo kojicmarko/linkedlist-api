@@ -51,6 +51,28 @@ export interface PostEntry {
   content: string;
 }
 
+export type CommentDTO = {
+  id: string;
+  content: string;
+  children: Child[];
+  author: string;
+  commentLikes: CommentLike[];
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type Child = {
+  id: string;
+  content: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export interface CommentEntry {
+  content: string;
+  parentId?: string;
+}
+
 export type Err = {
   ERROR: string;
 };

@@ -33,6 +33,7 @@ app.use(
 import pingRouter from "./routes/ping";
 import usersRouter from "./routes/users";
 import postsRouter from "./routes/posts";
+import commentsRouter from "./routes/comments";
 import authRouter from "./routes/auth";
 
 app.use(express.json());
@@ -40,6 +41,7 @@ app.use(express.json());
 app.use("/ping", pingRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/posts", postsRouter);
+app.use("/api/posts", commentsRouter);
 app.use("/api/auth/", authRouter);
 
 app.use(unknownEndpoint);

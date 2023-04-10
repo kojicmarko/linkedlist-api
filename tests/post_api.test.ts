@@ -49,7 +49,7 @@ describe("Posts", () => {
       const posts = await api.get("/api/posts");
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       const id = posts.body[0].id as string;
-      await api.get(`/api/posts/${id}`);
+      await api.get(`/api/posts/${id}`).expect(200);
     });
   });
 

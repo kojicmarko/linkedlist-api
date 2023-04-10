@@ -1,27 +1,21 @@
 import { prisma } from "../../../prisma/index";
 
-export const getPostByIdPersistance = async (id: string) => {
-  return await prisma.post.findUnique({
+export const getCommentByIdPersistance = async (id: string) => {
+  return await prisma.comment.findUnique({
     where: {
       id,
     },
     include: {
-      comments: {
+      children: {
         select: {
           id: true,
           parentId: true,
           content: true,
-          author: {
-            select: {
-              username: true,
-            },
-          },
-          commentLikes: true,
           createdAt: true,
           updatedAt: true,
         },
       },
-      postLikes: true,
+      commentLikes: true,
       author: {
         select: {
           username: true,
