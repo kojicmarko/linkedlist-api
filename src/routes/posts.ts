@@ -3,8 +3,9 @@ import {
   getAllPostsInteractor,
   createPostInteractor,
   getPostByIdInteractor,
+  updatePostInteractor,
 } from "../interactors/posts";
-import { Err, PostEntry } from "../utils/types";
+import { Err, PostEntry, UpdatePostEntry } from "../utils/types";
 
 const router = express.Router();
 
@@ -36,6 +37,25 @@ router.post("/", async (req, res) => {
   }
 
   return res.status(201).json(post);
+});
+
+router.put("/:id", async (req, res) => {
+  if (!req.session.userId) {
+    return res.status(401).send({ ERROR: "Unauthorized!" }).end();
+  }
+
+  const { content } = req.body as UpdatePostEntry;
+
+  const post = await updatePostInteractor(req.session.userId, {
+    id: req.params.id,
+    content,
+  });
+
+  if ((post as Err).ERROR !== undefined) {
+    return res.status(400).json(post);
+  }
+
+  return res.status(200).json(post);
 });
 
 export default router;

@@ -1,4 +1,4 @@
-import { prisma } from "../../../prisma/index";
+import { prisma } from "../../../prisma/";
 import { PostEntry } from "../../utils/types";
 
 export const createPostPersistance = async (

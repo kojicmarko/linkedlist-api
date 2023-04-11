@@ -2,7 +2,7 @@ import supertest from "supertest";
 import app from "../src/app";
 import { redisClient } from "../src/app";
 import { prisma } from "../prisma/";
-import { User } from "@prisma/client";
+import { Post, User } from "@prisma/client";
 import {
   TestHeader,
   existingUser,
@@ -79,6 +79,37 @@ describe("Posts", () => {
         .expect(400);
 
       expect(res.body).toEqual({ ERROR: "Invalid Post" });
+    });
+  });
+
+  describe("PUT /api/posts/:id", () => {
+    it("Can be edited by User who posted it", async () => {
+      const user = await api.post("/api/auth/login").send(validUser);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      const { header }: { header: TestHeader } = user;
+
+      const startPosts = await api.get("/api/posts");
+
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      const uneditedPost = startPosts.body[0] as Post;
+
+      const editedPost = {
+        content: "Edited!",
+      };
+
+      await api
+        .put(`/api/posts/${uneditedPost.id}`)
+        .set({ cookie: header["set-cookie"] })
+        .send(editedPost)
+        .expect(200);
+
+      const endPosts = await api.get("/api/posts");
+      const postList = endPosts.body as Post[];
+      const post = postList.find((post) => post.id === uneditedPost.id);
+
+      if (post) {
+        expect(post.content).toBe("Edited!");
+      }
     });
   });
 });

@@ -51,6 +51,11 @@ export interface PostEntry {
   content: string;
 }
 
+export interface UpdatePostEntry {
+  id: string;
+  content: string;
+}
+
 export type CommentDTO = {
   id: string;
   content: string;
