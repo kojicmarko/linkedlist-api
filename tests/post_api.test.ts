@@ -83,7 +83,7 @@ describe("Posts", () => {
   });
 
   describe("PUT /api/posts/:id", () => {
-    it("Can be edited by User who posted it", async () => {
+    it("Can be edited by User who created it", async () => {
       const user = await api.post("/api/auth/login").send(validUser);
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const { header }: { header: TestHeader } = user;
@@ -110,6 +110,31 @@ describe("Posts", () => {
       if (post) {
         expect(post.content).toBe("Edited!");
       }
+    });
+  });
+
+  describe("DELETE /api/posts/:id", () => {
+    it("Can be deleted by User who created it", async () => {
+      const user = await api.post("/api/auth/login").send(validUser);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      const { header }: { header: TestHeader } = user;
+
+      const startPosts = await api.get("/api/posts");
+      const startPostsList = startPosts.body as Post[];
+
+      const postToDelete = startPostsList[0];
+
+      await api
+        .delete(`/api/posts/${postToDelete.id}`)
+        .set({ cookie: header["set-cookie"] })
+        .expect(204);
+
+      const endPosts = await api.get("/api/posts");
+      const endPostsList = endPosts.body as Post[];
+      expect(endPostsList).toHaveLength(startPostsList.length - 1);
+
+      const titles = endPostsList.map((post) => post.title);
+      expect(titles).not.toContain(postToDelete.title);
     });
   });
 });

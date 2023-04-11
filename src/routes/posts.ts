@@ -4,6 +4,7 @@ import {
   createPostInteractor,
   getPostByIdInteractor,
   updatePostInteractor,
+  deletePostInteractor,
 } from "../interactors/posts";
 import { Err, PostEntry, UpdatePostEntry } from "../utils/types";
 
@@ -56,6 +57,21 @@ router.put("/:id", async (req, res) => {
   }
 
   return res.status(200).json(post);
+});
+
+router.delete("/:id", async (req, res) => {
+  if (!req.session.userId) {
+    return res.status(401).send({ ERROR: "Unauthorized!" }).end();
+  }
+
+  const err = await deletePostInteractor(req.session.userId, req.params.id);
+  console.log(err);
+
+  if ((err as Err).ERROR !== undefined) {
+    return res.status(400).json(err);
+  }
+
+  return res.status(204).end();
 });
 
 export default router;
