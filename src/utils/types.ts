@@ -8,6 +8,7 @@ declare module "express-session" {
 }
 
 export type UserDTO = {
+  id: string;
   username: string;
   posts: UserPost[];
   comments: Comment[];
@@ -76,6 +77,11 @@ export type Child = {
 export interface CommentEntry {
   content: string;
   parentId?: string;
+}
+
+export interface UpdateCommentEntry {
+  id: string;
+  content: string;
 }
 
 export type Err = {

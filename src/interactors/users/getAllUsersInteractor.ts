@@ -5,7 +5,16 @@ export const getAllUsersInteractor = async (): Promise<UserDTO[]> => {
   const users = await getAllUsersPersistance();
 
   return users.map(
-    ({ username, posts, comments, postLikes, commentLikes, createdAt }) => ({
+    ({
+      id,
+      username,
+      posts,
+      comments,
+      postLikes,
+      commentLikes,
+      createdAt,
+    }) => ({
+      id,
       username,
       posts,
       comments,

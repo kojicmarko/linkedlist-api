@@ -1,9 +1,6 @@
 import { getUserByIdPersistance } from "../../persistance/users";
-import { UserDTO } from "../../utils/types";
 
-export const getUserByIdInteractor = async (
-  id: string
-): Promise<UserDTO | undefined> => {
+export const getUserByIdInteractor = async (id: string) => {
   const user = await getUserByIdPersistance(id);
 
   if (!user) {

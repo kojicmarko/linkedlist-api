@@ -1,0 +1,23 @@
+name: Pipeline
+on: push
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+      - name: install
+      - run: npm install
+      - name: lint
+      - run: npm run lint
+      - name: test
+      - run: npm run test
+
+        env:
+          PORT: 3003
+          DATABASE_URL: postgresql://root:postgres@localhost:5432/linkedlist
+          REDIS_URL: 127.0.0.1:6379
+          SECRET: asdf1234

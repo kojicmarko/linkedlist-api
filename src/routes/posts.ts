@@ -65,7 +65,6 @@ router.delete("/:id", async (req, res) => {
   }
 
   const err = await deletePostInteractor(req.session.userId, req.params.id);
-  console.log(err);
 
   if ((err as Err).ERROR !== undefined) {
     return res.status(400).json(err);
