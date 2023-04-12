@@ -15,9 +15,8 @@ jobs:
       - run: npm run lint
       - name: test
       - run: npm run test
-
-        env:
-          PORT: 3003
-          DATABASE_URL: postgresql://root:postgres@localhost:5432/linkedlist
-          REDIS_URL: 127.0.0.1:6379
-          SECRET: asdf1234
+        # env:
+        #   PORT: 3003
+        #   DATABASE_URL: postgresql://root:postgres@localhost:5432/linkedlist
+        #   REDIS_URL: 127.0.0.1:6379
+        #   SECRET: asdf1234
