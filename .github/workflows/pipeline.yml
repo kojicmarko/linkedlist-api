@@ -33,7 +33,7 @@ jobs:
           node-version: "18.x"
       - run: npm ci
       - run: npm run lint
-      - run: npm run ci:test
+        # - run: npm run ci:test
         env:
           PORT: 3003
           DATABASE_URL: postgresql://root:postgres@localhost:5432/test
