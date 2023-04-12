@@ -4,19 +4,38 @@ jobs:
   pipeline:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES:USER: root
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+      redis:
+        image: redis
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: "18.x"
-      - name: install
-        run: npm install
-      - name: lint
-        run: npm run lint
-      - name: test
-        run: npm run test
+      - run: npm install
+      - run: npm run lint
+      - run: npm test
         env:
           PORT: 3003
-          DATABASE_URL: postgresql://root:postgres@localhost:5432/linkedlist
+          DATABASE_URL: postgresql://root:postgres@localhost:5432/test
           REDIS_URL: 127.0.0.1:6379
           SECRET: asdf1234
