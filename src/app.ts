@@ -4,15 +4,17 @@ import Redis from "ioredis";
 import connectRedis from "connect-redis";
 import { unknownEndpoint } from "./middleware/";
 import { COOKIE_NAME, REDIS_URL, SECRET } from "./utils/config";
+import * as dotenv from "dotenv";
 // TODO: Deal with that
 require("express-async-errors");
+
+dotenv.config();
 
 const app = express();
 
 const RedisStore = connectRedis(session);
 
-// Exported so Jest doesn't compalin
-// TODO: Deal with that
+// Exported for Jest
 export const redisClient = new Redis(REDIS_URL);
 
 app.use(

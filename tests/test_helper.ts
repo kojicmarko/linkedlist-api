@@ -1,53 +1,57 @@
-import {
-  CommentEntry,
-  PostEntry,
-  UserEntry,
-  UserLogin,
-} from "../src/utils/types";
+import { PORT } from "../src/utils/config";
+import { getAllCommentsInteractor } from "../src/interactors/comments";
+import { getAllPostsInteractor } from "../src/interactors/posts";
+import { getAllUsersInteractor } from "../src/interactors/users";
 
-export const existingUser: UserEntry = {
-  email: "existing@testmail.com",
-  username: "existing",
-  password: "existing",
+const url = `http://localhost:${PORT}`;
+
+const userOne = {
+  email: "userone@mail.com",
+  username: "userone",
+  password: "password",
 };
 
-export const validUser: UserLogin = {
-  email: "existing@testmail.com",
-  password: "existing",
+const userTwo = {
+  email: "usertwo@mail.com",
+  username: "usertwo",
+  password: "password",
 };
 
-export const invalidUser: UserLogin = {
-  email: "existing@testmail.com",
-  password: "invalid",
+const newUser = {
+  email: "test@mail.com",
+  username: "test",
+  password: "password",
 };
 
-export const newUser: UserEntry = {
-  email: "testing@testmail.com",
-  username: "testing",
-  password: "testing",
+const usersInDB = async () => {
+  return await getAllUsersInteractor();
 };
 
-export const validPost: PostEntry = {
-  title: "Test Post",
-  content: "This is a test post.",
+const newPost = {
+  title: "New Test Post",
+  content: "This is a new test post.",
 };
 
-export const invalidPost = {
-  random: "title",
-  invalid: "content",
+const postsInDB = async () => {
+  return await getAllPostsInteractor();
 };
 
-export const validComment: CommentEntry = {
-  content: "This is a test comment.",
+const newComment = {
+  content: "This is a new comment.",
 };
 
-// Should be temporary
-export type TestHeader = {
-  "x-powered-by": string;
-  "content-type": string;
-  "content-length": string;
-  etag: string;
-  "set-cookie": string[];
-  date: string;
-  connection: string;
+const commentsInDB = async () => {
+  return await getAllCommentsInteractor();
+};
+
+export default {
+  url,
+  userOne,
+  userTwo,
+  newUser,
+  usersInDB,
+  newPost,
+  postsInDB,
+  newComment,
+  commentsInDB,
 };

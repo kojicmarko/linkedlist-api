@@ -3,5 +3,18 @@
 ## Usage
 
 1. Run `npm install`
-2. Run `docker-compose up -d` (`-d` flag runs it in the background) to start PostgreSQL and Redis servers
-3. Run `npm run dev` to play with the application or `npm test` to run the tests
+2. Run `npm run docker:up` to start PostgreSQL and Redis containers
+3. Run `npm run dev` to play with the application
+
+### Running Tests
+
+1. Run `npm run docker:down` to stop default containers (If you started them runnig `npm run docker:up`)
+2. Run `npm test`
+
+#### To Rerun Tests:
+
+- Run `npm run test:only`
+
+#### To Stop Containers:
+
+- Run `npm run docker:down`

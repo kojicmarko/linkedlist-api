@@ -6,7 +6,7 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "module": "NodeNext",
-    "moduleResolution": "nodenext",
+    "moduleResolution": "NodeNext",
     "target": "ES2020",
     "sourceMap": true,
     "outDir": "dist",
