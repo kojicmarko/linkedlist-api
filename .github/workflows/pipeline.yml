@@ -1,5 +1,10 @@
 name: Pipeline
 on: push
+env:
+  PORT: 3003
+  DATABASE_URL: postgresql://root:postgres@localhost:5432/tests
+  REDIS_URL: 127.0.0.1:6379
+  SECRET: qwertyuiop1234567890
 jobs:
   pipeline:
     runs-on: ubuntu-latest
@@ -35,8 +40,3 @@ jobs:
       - run: npm run lint
       - run: npm run ci:migrate:deploy
       - run: npm run ci:test
-        env:
-          PORT: 3003
-          DATABASE_URL: postgresql://root:postgres@localhost:5432/tests
-          REDIS_URL: 127.0.0.1:6379
-          SECRET: qwertyuiop1234567890
