@@ -33,6 +33,7 @@ jobs:
           node-version: "18.x"
       - run: npm ci
       - run: npm run lint
+      - run: npm run ci:migrate:deploy
       - run: npm run ci:test
         env:
           PORT: 3003
