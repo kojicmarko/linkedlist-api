@@ -172,7 +172,7 @@ describe("LinkedList API", () => {
       const res = await api.post("/api/auth/login").send(helper.userOne);
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
       cookie = { cookie: res.headers["set-cookie"] };
-    }, 60000);
+    });
     describe("DELETE /api/users/:id", () => {
       it("Can delete Users account", async () => {
         const aUserAtStart = (await helper.usersInDB())[0];
@@ -198,7 +198,7 @@ describe("LinkedList API", () => {
       const res = await api.post("/api/auth/login").send(helper.userOne);
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
       cookie = { cookie: res.headers["set-cookie"] };
-    }, 60000);
+    });
     describe("GET /api/posts", () => {
       it("Returns Posts as JSON", async () => {
         const res = await api.get("/api/posts/");
@@ -275,7 +275,7 @@ describe("LinkedList API", () => {
       const res = await api.post("/api/auth/login").send(helper.userOne);
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
       cookie = { cookie: res.headers["set-cookie"] };
-    }, 60000);
+    });
     describe("GET /api/posts/:id/comments/", () => {
       it("Returns Comments as JSON", async () => {
         const postId = (await helper.postsInDB())[0].id;
